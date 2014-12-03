@@ -16,7 +16,7 @@ import record.RecordingThread;
 public class NewController {
 
 	private NewGui gui;
-	private final String soundDirectory = "sounds\\";
+	private final String soundDirectory = "sounds/";
 	private String[] filenames;
 	private AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
 
@@ -29,9 +29,21 @@ public class NewController {
 	}
 
 	private void refreshFilenames() {
-		filenames = new File(soundDirectory).list();
-		if(filenames != null) {
-			Arrays.sort(filenames);
+		String[] fNames = new File(soundDirectory).list();
+		if(fNames != null) {
+			Arrays.sort(fNames);
+		}
+		int total = 0;
+		for(int i = 0; i < fNames.length; i++) {
+			if(!fNames[i].startsWith(".")) total++;
+		}
+		filenames = new String[total];
+		int index = 0;
+		for(int i = 0; i < fNames.length; i++) {
+			if(!fNames[i].startsWith(".")) {
+				filenames[index] = fNames[i];
+				index++;
+			}
 		}
 		gui.lstFiles.setListData(filenames);
 	}
@@ -69,10 +81,13 @@ public class NewController {
 	private final int VALIDITY_INVALID_CHAR = 1;
 	private final int VALIDITY_EMPTY = 2;
 	private final int VALIDITY_TAKEN = 3;
+	private final int VALIDITY_STARTS_WITH_PERIOD = 4;
 
 	private int validFilename(String name) {
 		if (name.length() == 0)
 			return VALIDITY_EMPTY;
+		if (name.startsWith("."))
+			return VALIDITY_STARTS_WITH_PERIOD;
 		for (int i = 0; i < name.length(); i++) {
 			if (invalidChars.contains(name.subSequence(i, i + 1))) {
 				return VALIDITY_INVALID_CHAR;
@@ -105,6 +120,10 @@ public class NewController {
 		}
 		if (validity == VALIDITY_TAKEN) {
 			System.out.println("File already exists");
+			return;
+		}
+		if (validity == VALIDITY_STARTS_WITH_PERIOD) {
+			System.out.println("Filename cannot start with a period");
 			return;
 		}
 		File newFile = new File(soundDirectory + newFilename);

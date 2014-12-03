@@ -16,7 +16,7 @@ public class SoundAppController {
 	private AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
 	private RecordingThread recThread;
 	private PlayingThread playThread;
-	private final String soundDirectory = "sounds\\";
+	private final String soundDirectory = "sounds/";
 
 	public SoundAppController(SoundAppGui gui) {
 		this.gui = gui;
