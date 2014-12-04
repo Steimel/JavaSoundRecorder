@@ -32,7 +32,7 @@ import javax.swing.SwingUtilities;
  * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class NewGui extends javax.swing.JFrame {
+public class SoundGui extends javax.swing.JFrame {
 	private JPanel pnlMain;
 	private JMenuBar mnuBar;
 	private JMenuItem mnuFileOpen;
@@ -43,7 +43,7 @@ public class NewGui extends javax.swing.JFrame {
 	private JMenuItem mnuFileNew;
 	private JMenu mnuFile;
 	private JPanel pnlSidebar;
-	private NewController controller;
+	private SoundController controller;
 
 	{
 		// Set Look & Feel
@@ -61,16 +61,16 @@ public class NewGui extends javax.swing.JFrame {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				NewGui inst = new NewGui();
+				SoundGui inst = new SoundGui();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 
-	public NewGui() {
+	public SoundGui() {
 		super();
-		controller = new NewController(this);
+		controller = new SoundController(this);
 		initGUI();
 		controller.init();
 	}

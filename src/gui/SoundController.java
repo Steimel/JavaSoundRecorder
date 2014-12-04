@@ -13,14 +13,14 @@ import javax.swing.JPanel;
 import record.PlayingThread;
 import record.RecordingThread;
 
-public class NewController {
+public class SoundController {
 
-	private NewGui gui;
+	private SoundGui gui;
 	private final String soundDirectory = "sounds/";
 	private String[] filenames;
 	private AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
 
-	public NewController(NewGui gui) {
+	public SoundController(SoundGui gui) {
 		this.gui = gui;
 	}
 
@@ -163,9 +163,9 @@ public class NewController {
 	}
 
 	public void recordPressHandler(SoundTab tab) {
-		System.out.println("Recording: " + tab.filename);
 		tab.recording = !tab.recording;
 		if (tab.recording) {
+			System.out.println("Recording: " + tab.filename);
 			if (!(validFilename(tab.filename) == VALIDITY_TAKEN)) {
 				tab.recording = false;
 				System.out.println("Invalid Filename");
@@ -177,6 +177,7 @@ public class NewController {
 					+ tab.filename);
 			tab.recThread.startRecording();
 		} else {
+			System.out.println("Finished recording: " + tab.filename);
 			tab.btnPlay.setEnabled(true);
 			tab.btnRecord.setText("Record");
 			tab.recThread.stopRecording();
@@ -188,9 +189,9 @@ public class NewController {
 	}
 
 	public void playPressHandler(SoundTab tab) {
-		System.out.println("Playing: " + tab.filename);
 		tab.playing = !tab.playing;
 		if (tab.playing) {
+			System.out.println("Playing: " + tab.filename);
 			if (!(validFilename(tab.filename) == VALIDITY_TAKEN)) {
 				tab.playing = false;
 				System.out.println("Invalid filename");
@@ -212,6 +213,7 @@ public class NewController {
 				public void update(LineEvent event) {
 					if (event.getType() == LineEvent.Type.STOP) {
 						if (!tabHolder.recording) {
+							System.out.println("Playback stopped");
 							tabHolder.playing = false;
 							tabHolder.btnPlay.setText("Play");
 							tabHolder.btnRecord.setEnabled(true);

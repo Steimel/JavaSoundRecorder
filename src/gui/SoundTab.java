@@ -14,7 +14,7 @@ import record.RecordingThread;
 @SuppressWarnings("serial")
 public class SoundTab extends JPanel {
 	String filename;
-	NewController controller;
+	SoundController controller;
 
 	JButton btnRecord;
 	JButton btnPlay;
@@ -24,7 +24,7 @@ public class SoundTab extends JPanel {
 	RecordingThread recThread;
 	PlayingThread playThread;
 
-	public SoundTab(String filename, NewController theController) {
+	public SoundTab(String filename, SoundController theController) {
 		this.filename = filename;
 		this.controller = theController;
 		this.recording = false;
