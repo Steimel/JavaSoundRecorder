@@ -16,7 +16,7 @@ import record.RecordingThread;
 public class SoundController {
 
 	private SoundGui gui;
-	private final String soundDirectory = "sounds/";
+	private final String soundDirectory = "sounds" + File.separator;
 	private String[] filenames;
 	private AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
 
